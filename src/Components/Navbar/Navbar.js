@@ -87,31 +87,54 @@ const Navbar = () => {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
+                            {
 
-                            <MenuItem onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">
-                                    <Link style={{ color: "black", textDecoration: "none" }} to="/login">
-                                        SIGN IN
-                                    </Link>
-                                </Typography>
 
-                            </MenuItem>
-                            <MenuItem onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">
-                                    <Link style={{ color: "black", textDecoration: "none" }} to="/register">
-                                        SIGN UP
-                                    </Link>
-                                </Typography>
+                                !user ? <div >
 
-                            </MenuItem>
-                            <MenuItem onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">
-                                    <Link style={{ color: "black", textDecoration: "none" }} to="/countries">
-                                        Countries
-                                    </Link>
-                                </Typography>
+                                    <MenuItem onClick={handleCloseNavMenu}>
+                                        <Typography textAlign="center">
+                                            <Link style={{ color: "black", textDecoration: "none" }} to="/login">
+                                                SIGN IN
+                                            </Link>
+                                        </Typography>
 
-                            </MenuItem>
+                                    </MenuItem>
+                                    <MenuItem onClick={handleCloseNavMenu}>
+                                        <Typography textAlign="center">
+                                            <Link style={{ color: "black", textDecoration: "none" }} to="/register">
+                                                SIGN UP
+                                            </Link>
+                                        </Typography>
+
+                                    </MenuItem>
+                                </div> : <div>
+
+                                    <MenuItem onClick={handleCloseNavMenu}>
+                                        <Typography textAlign="center">
+                                            <Link style={{ color: "black", textDecoration: "none" }} to="/countries">
+                                                Countries
+                                            </Link>
+                                        </Typography>
+
+                                    </MenuItem>
+                                    <MenuItem onClick={async () => {
+                                        handleCloseNavMenu()
+                                        await signOut(auth)
+                                        swal("SUCCESS", "Sign out successful", "success")
+                                    }
+                                    }>
+                                        <Typography textAlign="center">
+                                            <Link style={{ color: "black", textDecoration: "none" }} to="/countries">
+                                                SIGN OUT
+                                            </Link>
+                                        </Typography>
+
+                                    </MenuItem>
+                                </div>
+                            }
+
+
 
                         </Menu>
                     </Box>
@@ -135,7 +158,7 @@ const Navbar = () => {
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {
-                            !user ? <>
+                            !user ? <div style={{display:"flex"}}>
                                 <Button
 
                                     onClick={handleCloseNavMenu}
@@ -155,7 +178,7 @@ const Navbar = () => {
                                     </Link>
                                 </Button>
 
-                            </> : <>
+                            </div> : <div style={{display:"flex"}}>
                                 <Button
 
                                     onClick={() => {
@@ -170,13 +193,13 @@ const Navbar = () => {
                                 </Button>
                                 <Button
 
-                             sx={{ my: 2, color: 'white', display: 'block' }}
+                                    sx={{ my: 2, color: 'white', display: 'block' }}
                                 >
-                                  <Link to="/countries">
-                                    Countries
-                                  </Link>
+                                    <Link to="/countries" style={{ color: "white", textDecoration: "none" }}>
+                                        Countries
+                                    </Link>
                                 </Button>
-                            </>
+                            </div>
                         }
 
                     </Box>

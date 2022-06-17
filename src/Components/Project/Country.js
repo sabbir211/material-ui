@@ -1,14 +1,12 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import React, { useContext, useState } from 'react';
-import CountryDetails from '../CountryDetails';
 import { CountriesContext } from './Countries';
 
 const Country = ({ data }) => {
-    const {getNumericCode}=useContext(CountriesContext)
-    const { name, flags,numericCode} = data
+    const {setName,setOpen}=useContext(CountriesContext)
+    const { name, flags} = data
     return (
         <Grid item xs={12} sm={4} >
-
             <Card sx={{ minWidth: 275 }}>
                 <CardMedia
                     component="img"
@@ -24,9 +22,11 @@ const Country = ({ data }) => {
                         {name.official}
                     </Typography>
                 </CardContent>
-                <CardActions>
-                  
-                    <Button size="large" onClick={getNumericCode(numericCode)}>Learn More</Button>
+                <CardActions>                  
+                    <Button size="large" onClick={()=>{
+                        setName(name.common) 
+                        setOpen(true)
+                    }}>Learn More</Button>
                 </CardActions>
             </Card>
            
